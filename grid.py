@@ -7,6 +7,6 @@ op = input("""Would you like to open it in:
 """)
 
 if op == "2":
-    os.system("gride "+file)
+    os.system("'C:\\Program Files(x86)\\Grid\\gride.exe' '"+file+"'")
 else:
-    os.system("gridc "+file)
+    os.system("'C:\\Program Files(x86)\\Grid\\gridc.exe' '"+file+"'")
