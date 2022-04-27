@@ -18,12 +18,11 @@ else:
     print("Looks like you forgot to pass a filepath!")
 if exists(gridpath):
     grid = open(gridpath)
-    log = open("C:\\Grid\\Grid.log", mode='at')
+    log = open("%localappdata%\Grid.log", mode='at')
     log.write("Start time:"+str(dt.now().strftime("%b-%d-%Y %H:%M:%S\n")))
-    log.write("File:"+str(gridpath) + "\nFile descriptor:" + str(grid) + "\nFile data:")
+    log.write("File:"+str(gridpath) + "\nFile descriptor:" + str(grid) + "\nFilename:")
     #print(grid)
     gdata =grid.read()
-    log.write(gdata + "\nFilename:")
     #print(gdata + "\n")
     c = re.findall(r': .+\s', gdata)
     fn = iso.findall(c[0])[0]
@@ -32,7 +31,7 @@ if exists(gridpath):
     log.write(fn + "." + ft + "\ncolortype:" + ct + "\nGrid data(pixel art):")
     #print(fn+"."+ft,"\ncolortype:",ct)
     c = re.findall(r':START\n([\d\w\s]+)\n:END', gdata)[0]
-    log.write(c.split("\n") + "\n(X, Y, Width, Height):")
+    log.write(str(c.split("\n")) + "\n(X, Y, Width, Height):")
     #print(c.split("\n"),"\n")
     w = len(c.split("\n")[0])
     h = len(c.split("\n"))
@@ -55,5 +54,6 @@ if exists(gridpath):
     grid.close()
 else:
     print("File doesn\'t exist!")
+print("Finished!")
 log.write("End time:"+dt.now().strftime("%b-%d-%Y %H:%M:%S\n"))
 log.close()
