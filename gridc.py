@@ -19,8 +19,8 @@ else:
 if exists(gridpath):
     grid = open(gridpath)
     log = open("C:\\Grid\\Grid.log", mode='at')
-    log.write("Start time:"+dt.now().strftime("%b-%d-%Y %H:%M:%S\n"))
-    log.write("File:"+gridpath + "\nFile descriptor:" + grid + "\nFile data:")
+    log.write("Start time:"+str(dt.now().strftime("%b-%d-%Y %H:%M:%S\n")))
+    log.write("File:"+str(gridpath) + "\nFile descriptor:" + str(grid) + "\nFile data:")
     #print(grid)
     gdata =grid.read()
     log.write(gdata + "\nFilename:")
@@ -36,7 +36,7 @@ if exists(gridpath):
     #print(c.split("\n"),"\n")
     w = len(c.split("\n")[0])
     h = len(c.split("\n"))
-    log.write(c + (w,h) + "\n")
+    log.write(c + str((w,h)) + "\n")
     #print(c, (w,h))
     if ct == "grayscale":
         im = Image.new(mode="RGB", size=(w*100,h*100))
@@ -45,7 +45,7 @@ if exists(gridpath):
             for x in range(w):
                 if c.split("\n")[y][x] == "1":
                     draw.rectangle((x*100, y*100, x*100+100, y*100+100), fill=(0, 0, 0))
-                    log.write((x, y, w, h))
+                    log.write(str((x, y, w, h)))
                     #print(x, y, w, h)
                 else:
                     draw.rectangle((x*100, y*100, x*100+100, y*100+100), fill=(255, 255, 255))
