@@ -1,7 +1,7 @@
 from os.path import exists
 from PIL import Image, ImageDraw
-from datetime import datetime as dt
-import sys, re
+from datetime import datetime as dt, date
+import sys, re, os
 
 print("Starting...")
 imgpath=gridpath = None#path to file, from sys.argv[1]
@@ -10,6 +10,11 @@ fn=ft=ct=w=h = None#grid attributes, such as name, filetype, colortype, width, a
 iso = re.compile(r'[a-zA-Z0-9]+')#regexp for isolating letters and numbers
 c = 0#temporary var for the current regexp
 gdata = 0#data inside file
+
+try:#make folder for log file
+    log = open("%TMP%\Grid\Grid.log", 'a')
+except:
+    log = open("%TMP%\Grid\Grid.log", 'w')
 if len(sys.argv) == 2:
     gridpath = sys.argv[1]
     c = re.compile(r'(\w:[a-zA-Z0-9\\]+\\)[\w\d]*\.[\w\d]+')
@@ -18,7 +23,6 @@ else:
     print("Looks like you forgot to pass a filepath!")
 if exists(gridpath):
     grid = open(gridpath)
-    log = open("%localappdata%\Grid.log", mode='at')
     log.write("Start time:"+str(dt.now().strftime("%b-%d-%Y %H:%M:%S\n")))
     log.write("File:"+str(gridpath) + "\nFile descriptor:" + str(grid) + "\nFilename:")
     #print(grid)
